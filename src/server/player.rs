@@ -4,10 +4,10 @@ use vector::Vector2;
 
 pub trait Player {
 
-	fn name() -> String;
-	fn uuid() -> String; // TODO: Are we using UUIDs here? Need to check proto
+	fn name(&self) -> String;
+	fn uuid(&self) -> String; // TODO: Are we using UUIDs here? Need to check proto
 	
 	// TODO: Verify that f32 is right here
-	fn location() -> Location;
-	fn rotation() -> Vector2<f32>;
+	fn location(&self) -> Location;
+	fn rotation(&self) -> Vector2<f32>;
 }
