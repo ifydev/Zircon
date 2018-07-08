@@ -2,5 +2,6 @@
 name = "Zircon"
 version = "0.1.0"
 authors = ["Innectic <innectic@gmail.com>"]
+license = "MIT"
 
 [dependencies]
