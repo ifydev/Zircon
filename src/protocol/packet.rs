@@ -51,7 +51,7 @@ pub enum PacketTypes {
 	/// 3. Client Address, `Address`
 	/// 4. MTU, `short`
 	/// 5. Encryption status, `byte`. Acts as a boolean.
-	OfflineConnectionRequest2(u8, i64, String, i16, i8)
+	OfflineConnectionRequest2(u8, i64, String, i16, i8),
 	/// 0x08
 	///
 	/// # Parameters
@@ -86,6 +86,5 @@ pub enum PacketTypes {
 	/// 1. Protocol, `byte`
 	/// 2. Magic, `magic`
 	/// 3. Server GUID, `long`
-	IncompatibleProtocol(i32, u8, i64),
-	/// 
+	IncompatibleProtocol(i32, u8, i64)
 }
