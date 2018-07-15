@@ -12,11 +12,12 @@ pub enum ZirconError {
 /// are neededt that we don't provide.
 pub trait ZirconServer {
 
-	fn start(&self, address: &str, port: u16) -> Result<(), ZirconError>;
-	fn stop(&self) -> Result<(), ZirconError>;
+	fn start(&mut self, address: &str, port: u16) -> Result<(), ZirconError>;
+	fn stop(&mut self) -> Result<(), ZirconError>;
 
 	fn online_players(&self) -> Vec<&dyn Player>;
 }
 
 mod player;
 mod location;
+mod server;

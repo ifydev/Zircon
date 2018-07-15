@@ -1,8 +1,14 @@
 
-const MAGIC: [u8; 16] = [0x00, 0xff, 0xff, 0x00,
+// TODO: These values overflow i8, but they're supposed to be the size of a byte AKA i8.
+const MAGIC: [i8; 16] = [0x00, 0xff, 0xff, 0x00,
 						 0xfe, 0xfe, 0xfe, 0xfe,
 						 0xfd, 0xfd, 0xfd, 0xfd,
 						 0x12, 0x34, 0x56, 0x78];
+
+pub enum Priority {
+	Normal,
+	Immediate
+}
 
 pub enum PacketTypes {
 	/// 0x00
@@ -88,3 +94,4 @@ pub enum PacketTypes {
 	/// 3. Server GUID, `long`
 	IncompatibleProtocol(i32, u8, i64)
 }
+
