@@ -1,4 +1,5 @@
 
+#[derive(Clone)]
 pub struct Location {
 	x: f32,
 	y: f32,
