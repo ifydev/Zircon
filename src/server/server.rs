@@ -16,19 +16,21 @@ pub struct DefaultServer<'players> {
 	max_players: u32
 }
 
-impl DefaultServer {
+impl<'players> DefaultServer<'players> {
 
 	pub fn new(max_players: u32) -> Self {
-		socket: None,
-		players: vec! [],
-		max_ticks: 20,
-		max_players
+		DefaultServer {
+			socket: None,
+			players: vec! [],
+			max_ticks: 20,
+			max_players
+		}
 	}
 }
 
 impl<'players> ZirconServer for DefaultServer<'players> {
 
-	fn start(&mut self, address: &str, port: u16) -> Result<(), ZirconError> {
+	fn start(&mut self, address: &str, port: i16) -> Result<(), ZirconError> {
 		match UdpSocket::bind(&format!("{}:{}", address, port)) {
 			Ok(socket) => {
 				self.socket = Some(socket);
@@ -57,5 +59,7 @@ impl<'players> ZirconServer for DefaultServer<'players> {
 
 	}
 
-	fn handle_packet(&mut self, address: String, port: i16, payload: Vec<i8>)
+	fn handle_packet(&mut self, address: String, port: i16, payload: Vec<i8>) {
+
+	}
 }

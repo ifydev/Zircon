@@ -23,6 +23,7 @@ pub trait ZirconServer {
 	fn handle_packet(&mut self, address: String, port: i16, payload: Vec<i8>);
 }
 
-mod player;
 mod location;
 mod server;
+
+mod player;

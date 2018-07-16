@@ -12,6 +12,7 @@ pub trait Player {
 	fn rotation(&self) -> Vector2<f32>;
 }
 
+#[derive(Clone)]
 pub struct DefaultPlayer {
 	name: String,
 	uuid: String,
