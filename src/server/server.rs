@@ -1,6 +1,6 @@
 
 use server::{
-	player::Player,
+	player::{Player, PlayerManager, DefaultPlayerManager},
 	ZirconServer, ZirconError
 };
 
@@ -9,26 +9,22 @@ use std::{
 	vec::Vec
 };
 
-pub struct DefaultServer<'players> {
+pub struct DefaultServer {
 	socket: Option<UdpSocket>,
-	players: Vec<&'players dyn Player>,
-	max_ticks: u8,
-	max_players: u32
+	player_manager: Box<PlayerManager>
 }
 
-impl<'players> DefaultServer<'players> {
+impl DefaultServer {
 
 	pub fn new(max_players: u32) -> Self {
 		DefaultServer {
 			socket: None,
-			players: vec! [],
-			max_ticks: 20,
-			max_players
+			player_manager: Box::new(DefaultPlayerManager::new(127))
 		}
 	}
 }
 
-impl<'players> ZirconServer for DefaultServer<'players> {
+impl ZirconServer for DefaultServer {
 
 	fn start(&mut self, address: &str, port: i16) -> Result<(), ZirconError> {
 		match UdpSocket::bind(&format!("{}:{}", address, port)) {
@@ -47,10 +43,6 @@ impl<'players> ZirconServer for DefaultServer<'players> {
 		Ok(())
 	}
 
-	fn online_players(&self) -> Vec<&dyn Player> {
-		self.players.clone()
-	}
-
 	fn start_connection(&mut self, ident: String, address: String, port: i16, client_id: i64) {
 
 	}
@@ -61,5 +53,9 @@ impl<'players> ZirconServer for DefaultServer<'players> {
 
 	fn handle_packet(&mut self, address: String, port: i16, payload: Vec<i8>) {
 
+	}
+
+	fn player_manager(&self) -> &Box<PlayerManager> {
+		&self.player_manager
 	}
 }
